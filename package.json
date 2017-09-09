@@ -1,0 +1,11 @@
+{
+  "name": "fcronjs",
+  "version": "0.0.0",
+  "description": "Package for manage function call timetable",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kuznetsov Leonid (kuznetsovlv1981@gmail.com)",
+  "license": "MIT"
+}
