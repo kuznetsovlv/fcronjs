@@ -4,7 +4,11 @@
 	<title>fcronjs</title>
 	<script src="./fcronjs.js"></script>
 	<script>
-		console.log(fcronjs.test('a'));
+		var f = fcronjs.debounce(console.log, 1000, false, console);
+
+    f(10);
+
+    f(20);
 	</script>
 </head>
 <body>
