@@ -1,3 +1,3 @@
-import test from './test';
+import debounce from './debounce';
 
-exports.test = test;
+exports.debounce = debounce;
