@@ -4,8 +4,24 @@
   "description": "Package for manage function call timetable",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clear": "rm -rf dist && rm web/*.js",
+    "product": "NODE_ENV=product webpack -p",
+    "dev": "NODE_ENV=development webpack",
+    "web": "NODE_ENV=web webpack -p",
+    "build": "npm run clear && npm run product && npm run web",
+    "start": "npm run dev",
+    "test": "node ./test"
   },
   "author": "Kuznetsov Leonid (kuznetsovlv1981@gmail.com)",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "6.2.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-1": "^6.24.1",
+    "webpack": "^1.14.0"
+  }
 }
