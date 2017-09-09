@@ -8,7 +8,7 @@
     "product": "NODE_ENV=product webpack -p",
     "dev": "NODE_ENV=development webpack",
     "web": "NODE_ENV=web webpack -p",
-    "build": "npm run clear && npm run product && npm run web",
+    "build": "npm run clear || npm run product && npm run web",
     "start": "npm run dev",
     "test": "node ./test"
   },
