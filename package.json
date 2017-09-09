@@ -1,6 +1,6 @@
 {
   "name": "fcronjs",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha0",
   "description": "Package for manage function call timetable",
   "main": "dist/index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "web": "NODE_ENV=web webpack -p",
     "build": "npm run clear && npm run product && npm run web",
     "start": "npm run dev",
-    "test": "node ./test"
+    "test": "babel-node ./test/test.js"
   },
   "author": "Kuznetsov Leonid (kuznetsovlv1981@gmail.com)",
   "license": "MIT",
