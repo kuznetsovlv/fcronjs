@@ -1,4 +1,6 @@
-export default (func, wait = 100, immediate = false, context) => {
+const window = typeof window === undefined ? undefined : window;
+export default (func, config = {}) => {
+  const { wait = 100, immediate = false, context = window } = config;
   let timeout;
 
   const debouncedFunc = function (...args) {
@@ -11,8 +13,10 @@ export default (func, wait = 100, immediate = false, context) => {
     };
 
     if (timeout) {
-      clearTimeout(timeout);
-    } else if (immediate) {
+      return;
+    }
+
+    if (immediate) {
       func.apply(this, args);
     }
 
