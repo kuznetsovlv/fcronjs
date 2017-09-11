@@ -1,11 +1,6 @@
 import { debounce } from './index';
 
 const WAIT = 200;
-// const CONTEXT = {
-//   toString () {
-//     return '--TEST CONTEXT--';
-//   }
-// };
 
 const TIMEOUTS = [0, 10, 100, 300, 500, 1000, 1500, 3000, 3010];
 

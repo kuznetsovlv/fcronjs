@@ -60,9 +60,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _debounce2 = _interopRequireDefault(_debounce);
 
+	var _throttle = __webpack_require__(3);
+
+	var _throttle2 = _interopRequireDefault(_throttle);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.debounce = _debounce2.default;
+	exports.throttle = _throttle2.default;
 
 /***/ }),
 /* 1 */
@@ -144,6 +149,66 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  return context && (typeof context === 'undefined' ? 'undefined' : _typeof(context)) === 'object' ? debouncedFunc.bind(context) : debouncedFunc;
+	};
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+
+	var _throttle = __webpack_require__(4);
+
+	var _throttle2 = _interopRequireDefault(_throttle);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _throttle2.default;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	exports.default = function (func) {
+	  var period = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 100;
+
+	  var timeout = void 0;
+	  var argList = void 0;
+	  var context = void 0;
+
+	  return function () {
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    if (timeout) {
+	      argList = args;
+	      context = this;
+	    } else {
+	      argList = context = null;
+
+	      func.apply(this, args);
+
+	      timeout = setTimeout(function () {
+	        timeout = null;
+
+	        if (argList) {
+	          func.apply(context, argList);
+	        }
+	      }, period);
+	    }
+	  };
 	};
 
 /***/ })
