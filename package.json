@@ -13,6 +13,10 @@
     "test": "babel-node ./test/test.js"
   },
   "author": "Kuznetsov Leonid (kuznetsovlv1981@gmail.com)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kuznetsovlv/fcronjs.git"
+  },
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.0",
