@@ -95,16 +95,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-	var window = (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === undefined ? undefined : window;
-
 	exports.default = function (func) {
 	  var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	  var _config$wait = config.wait,
 	      wait = _config$wait === undefined ? 100 : _config$wait,
 	      _config$immediate = config.immediate,
 	      immediate = _config$immediate === undefined ? false : _config$immediate,
-	      _config$context = config.context,
-	      context = _config$context === undefined ? window : _config$context;
+	      context = config.context;
 
 	  var timeout = void 0;
 

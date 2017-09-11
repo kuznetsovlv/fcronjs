@@ -1,6 +1,6 @@
-const window = typeof window === undefined ? undefined : window;
+
 export default (func, config = {}) => {
-  const { wait = 100, immediate = false, context = window } = config;
+  const { wait = 100, immediate = false, context } = config;
   let timeout;
 
   const debouncedFunc = function (...args) {
