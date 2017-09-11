@@ -95,6 +95,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+	/**
+	 * Method debounce creates Hi Ordered Function which sets minimal period between calls.
+	 * @param {Function} func - original function.
+	 * @param {Object} [config = {}] - configurin object.
+	 * @param {number} [config#wait = 100] - minimal number of milliseconds to be waited between calls.
+	 * @param {boolean} [config#immediate = false] - when immediate = true function calls immediatly
+	 *                                               if it is possible, in other case it cals after
+	 *                                               wait ms.
+	 * @param {Object} [config#context] - context object of function. If context was set it can not
+	 *                                    be changed or removed.
+	 * @return {Function} - decorated function.
+	 */
 	exports.default = function (func) {
 	  var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	  var _config$wait = config.wait,
