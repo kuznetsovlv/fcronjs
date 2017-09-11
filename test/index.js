@@ -180,6 +180,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
+	/**
+	 * Method debounce creates Hi Ordered Function which sets minimal period between calls
+	 * and execute last call every time.
+	 * @param {Function} func - original function.
+	 * @param {number} [period = 100] - minimal number of milliseconds to be waited between calls.
+	 * @return {Function} - decorated function.
+	 */
 	exports.default = function (func) {
 	  var period = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 100;
 
