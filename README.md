@@ -10,15 +10,15 @@ Package for manage function call timetable.
 - [Support.](#user-content-support "Supported brousers")
 - [License](#user-content-license "License")
 
-##GitHub.
+## GitHub.
 [Progect on GitHub.](https://github.com/kuznetsovlv/fcronjs "Link to GitHub repository")
 
-##Install.
+## Install.
 ```bash
 npm install fcronjs --save
 ```
 
-##Usage.
+## Usage.
 Import `fcronjs` form package:
 ```javascript
   import fcronjs from 'fcronjs';
@@ -31,7 +31,7 @@ or add script fcron.js_ from _web/fcron.js_ in branch _master_ and add itinto yo
 
 and use:
 
-###debounce
+### debounce
 ```javascript
   import { debounce } from 'fcronjs';
 ```
@@ -63,8 +63,8 @@ For examlpe:
 
 In output very likely will be `0`, `1000`, `2000`, `3000`, and `4200`. And `10`, `100`, `1010`, `3500` likely to be ignored. 
 
-##Support.
+## Support.
 Supported browsers _IE9+_.
 
-##License
+## License
 [MIT](./LICENSE "MIT") Copyright (c) 2017 Kuznetsov Leonid.
