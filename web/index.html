@@ -4,7 +4,7 @@
 	<title>fcronjs</title>
 	<script src="./fcron.js"></script>
 	<script>
-		var f = fcronjs.debounce(console.log, 1000, false, console);
+		var f = fcronjs.debounce(console.log, {wait: 1000, immediate: false, context: console});
 
     var timeouts = [0, 10, 100, 1000, 1010, 2000, 3000, 3500, 3550, 4200];
 

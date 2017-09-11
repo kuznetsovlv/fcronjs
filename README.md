@@ -54,14 +54,14 @@ For examlpe:
 ```javascript
   import { debounce } from 'fcronjs';
 
-  const f = debounce(console.log, 1000, false, console);
+  const f = fcronjs.debounce(console.log, {wait: 1000, immediate: false, context: console});
 
   const timeouts = [0, 10, 100, 1000, 1010, 2000, 3000, 3500, 3550, 4200];
 
   timeouts.forEach(x => setTimeout(f, x, x));
 ```
 
-In output very likely will be `0`, `1000`, `2000`, `3000`, and `4200`. And `10`, `100`, `1010`, `3500` likely to be ignored. 
+In output very likely will be `0`, `1010`, `3000`, and `4200`. And `10`, `100`, `1000`, `2000`, `3500` likely to be ignored. 
 
 ## Support.
 Supported browsers _IE9+_.
