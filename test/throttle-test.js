@@ -1,7 +1,7 @@
 import { throttle } from './index';
 
-const PERIOD = 1000;
-const TIMEOUTS = [0, 10, 100, 1000, 1010, 2000, 3000, 3500, 3550, 4200, 4210, 4215];
+const PERIOD = 200;
+const TIMEOUTS = [0, 10, 50, 100, 150, 200, 220, 230, 240, 600, 610, 620, 850, 900, 1000, 1500, 1520];
 const CONTEXT = {
   toString() {
     return '-TEST CONTEXT-';
@@ -27,7 +27,7 @@ export default () => {
     const text = `Try №${++i} with timeout ${x}.${i === TIMEOUTS.length ? ' Must be called!' : ''}`;
 
     setTimeout(() => {
-      console.log(`Try №${i}`);
+      console.log(`Try №${i} whith timeout ${x}.`);
 
       if (i < TIMEOUTS.length / 2) {
         f(new Date(), text);
