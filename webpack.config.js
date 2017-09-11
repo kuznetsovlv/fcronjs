@@ -22,7 +22,7 @@ const plugins = [
 	})
 ];
 
-const webOutput = {filename: 'fcronjs.js', path: path.resolve(__dirname, 'web'), library: 'fcronjs', libraryTarget: 'var'};
+const webOutput = {filename: 'fcron.js', path: path.resolve(__dirname, 'web'), library: 'fcronjs', libraryTarget: 'var'};
 const defaultOutput = {filename: 'index.js', path: path.resolve(__dirname, DEV || TEST  ? 'test' : 'dist'), library: 'fcronjs', libraryTarget: 'umd'};
 
 const productPlugins = [
