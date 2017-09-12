@@ -1,6 +1,6 @@
 /**
  * Method debounce creates Hi Ordered Function which sets minimal period between calls
- * and execute last call every time.
+ * and execute last call every time at the end.
  * @param {Function} func - original function.
  * @param {number} [period = 100] - minimal number of milliseconds to be waited between calls.
  * @return {Function} - decorated function.
