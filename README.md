@@ -24,7 +24,7 @@ Import `fcronjs` form package:
 ```javascript
   import fcronjs from 'fcronjs';
 ```
-or add script fcron.js_ from _web/fcron.js_ in branch _master_ and add itinto your _HTML_:
+or add script _fcron.js_ from _web/fcron.js_ in branch _master_ and add itinto your _HTML_:
 
 ```html
   <script src="./fcron.js"></script>
