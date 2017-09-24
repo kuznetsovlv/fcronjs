@@ -30,16 +30,28 @@ const getCallback = () => {
 export default (config) => {
   console.log('Test for debounce method started');
 
-  if (config) {
-    console.log('Method is used with parameters');
+  if (config !== null && config !== undefined) {
+    switch (typeof config) {
+      case 'object':
+        console.log('Method is used with parameters');
 
-    Object.keys(config).forEach(key => console.log(`${key}: ${config[key]}`));
+        Object.keys(config).forEach(key => console.log(`${key}: ${config[key]}`));
+        break;
+      case 'number':
+        console.log(`Method is used with delay ${config} ms.`)
+    }
   }
 
   console.log('START:');
   console.log('-------------------------------\n');
 
-  const callback = config ? debounce(getCallback(), {wait: WAIT, ...config}) : debounce(getCallback(), {wait: WAIT});
+  let callback;
+
+  if (config === null || config === undefined) {
+    callback = debounce(getCallback(), {delay: WAIT});
+  } else {
+    callback = typeof config  === 'object' ? debounce(getCallback(), {delay: WAIT, ...config}) : debounce(getCallback(), config);
+  }
 
   TIMEOUTS.forEach((timeout, i) => {
     setTimeout(() => {

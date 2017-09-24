@@ -2,6 +2,9 @@
 
 Package for manage function call timetable.
 
+## WARNING:
+**Since version 2.0.1 the contract for debounce and throttle methods has been changed. New contract is compatible for old throttle's contract but incompatible for debounce's contract in previous versions.**
+
 ## [Content](#user-content-content "Conten")
 - [GitHub.](#user-content-github "Link to GitHub repository")
 - [Install.](#user-content-install "Install")
@@ -35,7 +38,7 @@ and use:
 ### debounce
 ```javascript
   import { debounce } from 'fcronjs';
-```
+``` 
 
 or
 
@@ -46,16 +49,18 @@ or
 Method debounce creates Hi Ordered Function which sets minimal period between calls. It has two arguments:
 
   * {Function} func - original function.
-  * {Object} [config = {}] - configurin object. You can configure next properies: 
-    * {number} [wait = 100] - minimal number of milliseconds to be waited between calls.
-    * {boolean} [immediate = false] - when immediate = true function calls immediatly if it is possible, in other case it cals after wait ms.
-    * {Object} [context] - context object of function. If context was set it can not be changed or removed.
+  * {Object|number} [secondArgument] - in case Object - configurin object, in other case - [config#delay = 100].
+
+    Configuring object has 3 parameters:
+    * {number} [config#delay = 100] - minimal number of milliseconds to be waited between calls.
+    * {boolean} [config#immediate = false] - when immediate = true function calls immediatly if it is possible, in other case it cals after delay ms.
+    * {Object} [config#context] - context object of function. If context was set it can not be changed or removed.
 
 For examlpe:
 ```javascript
   import { debounce } from 'fcronjs';
 
-  const f = debounce(console.log, {wait: 1000, immediate: false, context: console});
+  const f = debounce(console.log, {delay: 1000, immediate: false, context: console});
 
   const timeouts = [0, 10, 100, 1000, 1010, 2000, 3000, 3500, 3550, 4200];
 
@@ -78,7 +83,11 @@ or
 Method debounce creates Hi Ordered Function which sets minimal period between calls and execute last call every time at the end.
 
 * {Function} func - original function.
-* {number} [period = 100] - minimal number of milliseconds to be waited between calls.
+* {Object|number} [secondArgument] - in case Object - configurin object, in other case - [config#delay = 100].
+
+    Configuring object has 3 parameters:
+    * {number} [config#delay = 100] - minimal number of milliseconds to be waited between calls.
+    * {boolean} [config#immediate = false] - when immediate = true function calls immediatly if it is possible, in other case it cals after delay ms.
 
 For examlpe:
 ```javascript

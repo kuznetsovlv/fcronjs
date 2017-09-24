@@ -60,7 +60,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _debounce2 = _interopRequireDefault(_debounce);
 
-	var _throttle = __webpack_require__(3);
+	var _throttle = __webpack_require__(5);
 
 	var _throttle2 = _interopRequireDefault(_throttle);
 
@@ -90,7 +90,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -100,25 +100,29 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+	var _utils = __webpack_require__(3);
+
 	/**
 	 * Method debounce creates Hi Ordered Function which sets minimal period between calls.
 	 * @param {Function} func - original function.
-	 * @param {Object} [config = {}] - configurin object.
-	 * @param {number} [config#wait = 100] - minimal number of milliseconds to be waited between calls.
+	 * @param {Object|number} [secondArgument] - in case Object - configurin object,
+	 *                                           in other case - [config#delay = 100].
+	 * Configuring object has 3 parameters:
+	 * @param {number} [config#delay = 100] - minimal number of milliseconds to be waited between calls.
 	 * @param {boolean} [config#immediate = false] - when immediate = true function calls immediatly
 	 *                                               if it is possible, in other case it cals after
-	 *                                               wait ms.
+	 *                                               delay ms.
 	 * @param {Object} [config#context] - context object of function. If context was set it can not
 	 *                                    be changed or removed.
 	 * @return {Function} - decorated function.
 	 */
-	exports.default = function (func) {
-	  var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-	  var _config$wait = config.wait,
-	      wait = _config$wait === undefined ? 100 : _config$wait,
-	      _config$immediate = config.immediate,
-	      immediate = _config$immediate === undefined ? false : _config$immediate,
-	      context = config.context;
+	exports.default = function (func, secondArgument) {
+	  var _getConfig = (0, _utils.getConfig)(secondArgument),
+	      _getConfig$delay = _getConfig.delay,
+	      delay = _getConfig$delay === undefined ? 100 : _getConfig$delay,
+	      _getConfig$immediate = _getConfig.immediate,
+	      immediate = _getConfig$immediate === undefined ? false : _getConfig$immediate,
+	      context = _getConfig.context;
 
 	  var timeout = void 0;
 
@@ -145,7 +149,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      func.apply(this, args);
 	    }
 
-	    timeout = setTimeout(callback, wait);
+	    timeout = setTimeout(callback, delay);
 	  };
 
 	  return context && (typeof context === 'undefined' ? 'undefined' : _typeof(context)) === 'object' ? debouncedFunc.bind(context) : debouncedFunc;
@@ -160,9 +164,72 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.getConfig = undefined;
+
+	var _getConfig = __webpack_require__(4);
+
+	var _getConfig2 = _interopRequireDefault(_getConfig);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.getConfig = _getConfig2.default;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	/**
+	 * Converts argument into config for debounce and throttle functions.
+	 * @params {*} [arg] - argument to be converted inco config object.
+	 * @return {Object} - config.
+	 */
+	exports.default = function (arg) {
+	  if (arg === null || typeof arg === 'undefined') {
+	    return { delay: 100, immediate: false };
+	  }
+
+	  if ((typeof arg === 'undefined' ? 'undefined' : _typeof(arg)) === 'object') {
+	    var _arg = arg,
+	        _arg$delay = _arg.delay,
+	        delay = _arg$delay === undefined ? 100 : _arg$delay,
+	        _arg$immediate = _arg.immediate,
+	        immediate = _arg$immediate === undefined ? false : _arg$immediate,
+	        context = _arg.context;
+
+	    return { delay: delay, immediate: immediate, context: context };
+	  }
+
+	  if (typeof arg === 'string') {
+	    arg = parseInt(arg, 10);
+	  }
+
+	  if (typeof arg !== 'number' || isNaN(arg)) {
+	    arg = 0;
+	  }
+
+	  return { delay: arg, immediate: false };
+	};
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	exports.default = undefined;
 
-	var _throttle = __webpack_require__(4);
+	var _throttle = __webpack_require__(6);
 
 	var _throttle2 = _interopRequireDefault(_throttle);
 
@@ -171,30 +238,44 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = _throttle2.default;
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports) {
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 
+	var _utils = __webpack_require__(3);
+
 	/**
 	 * Method debounce creates Hi Ordered Function which sets minimal period between calls
-	 * and execute last call every time.
+	 * and execute last call every time at the end.
 	 * @param {Function} func - original function.
-	 * @param {number} [period = 100] - minimal number of milliseconds to be waited between calls.
+	 * @param {Object|number} [secondArgument] - in case Object - configurin object,
+	 *                                           in other case - [config#delay = 100].
+	 * Configuring object has 3 parameters:
+	 * @param {number} [config#delay = 100] - minimal number of milliseconds to be waited between calls.
+	 * @param {boolean} [config#immediate = false] - when immediate = true function calls immediatly
+	 *                                               if it is possible, in other case it cals after
+	 *                                               delay ms.
 	 * @return {Function} - decorated function.
 	 */
-	exports.default = function (func) {
-	  var period = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 100;
+	exports.default = function (func, secondArgument) {
+	  var _getConfig = (0, _utils.getConfig)(secondArgument),
+	      _getConfig$delay = _getConfig.delay,
+	      delay = _getConfig$delay === undefined ? 100 : _getConfig$delay,
+	      _getConfig$immediate = _getConfig.immediate,
+	      immediate = _getConfig$immediate === undefined ? false : _getConfig$immediate;
 
 	  var timeout = void 0;
 	  var argList = void 0;
 	  var context = void 0;
 
 	  return function () {
+	    var _this = this;
+
 	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
 	      args[_key] = arguments[_key];
 	    }
@@ -205,15 +286,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	    } else {
 	      argList = context = null;
 
-	      func.apply(this, args);
+	      if (immediate) {
+	        func.apply(this, args);
+	      }
 
 	      timeout = setTimeout(function () {
 	        timeout = null;
 
+	        if (!immediate) {
+	          func.apply(_this, args);
+	        }
+
 	        if (argList) {
 	          func.apply(context, argList);
 	        }
-	      }, period);
+	      }, delay);
 	    }
 	  };
 	};
