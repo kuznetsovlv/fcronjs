@@ -1,5 +1,6 @@
 import debounceTest from './debounce-test';
 import throttleTest from './throttle-test';
+import waiterTest from './waiter-test';
 
 const args = process.argv;
 
@@ -12,6 +13,7 @@ const checkForKeys = (index, ...keys) => {
 
 const debounceIndex = findArgument('debounce');
 const throttleIndex = findArgument('throttle');
+const waiterIndex = findArgument('waiter');
 
 if (debounceIndex >= 0) {
   const keys = checkForKeys(debounceIndex, 'immediate', 'context', 'ms');
@@ -60,4 +62,8 @@ if (throttleIndex >= 0) {
       throttleTest(config);
     }
   }
+}
+
+if (waiterIndex >= 0) {
+  waiterTest();
 }

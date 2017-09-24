@@ -1,7 +1,7 @@
 import { getConfig } from '../utils';
 
 /**
- * Method debounce creates Hi Ordered Function which sets minimal period between calls
+ * Method throttle creates Hi Ordered Function which sets minimal period between calls
  * and execute last call every time at the end.
  * @param {Function} func - original function.
  * @param {Object|number} [secondArgument] - in case Object - configurin object,

@@ -11,6 +11,7 @@ Package for manage function call timetable.
 - [Usage.](#user-content-usege "Usage")
   - [debounce](#user-content-debounce "debounce")
   - [throttle](#user-content-throttle "throttle")
+  - [waiter](#user-content-waiter "waiter")
 - [Support.](#user-content-support "Supported brousers")
 - [License](#user-content-license "License")
 
@@ -80,7 +81,7 @@ or
   var throttle = fcronjs.throttle;
 ```
 
-Method debounce creates Hi Ordered Function which sets minimal period between calls and execute last call every time at the end.
+Method throttle creates Hi Ordered Function which sets minimal period between calls and execute last call every time at the end.
 
 * {Function} func - original function.
 * {Object|number} [secondArgument] - in case Object - configurin object, in other case - [config#delay = 100].
@@ -102,6 +103,39 @@ For examlpe:
 
 In output very likely will be `0`, `1000`, `1010` (as a last), `2000`, `3000`, and `3550` (as a last), `10000`, and `10001` (as a last). And `10`, `100`, `3500` likely to be ignored.
 
+### waiter
+```javascript
+  import { waiter } from 'fcronjs';
+```
+
+or
+
+```javascript
+  var waiter = fcronjs.waiter;
+```
+
+Method waiter creates Hi Ordered Function which at call waits some time befor call original function, and in case of second call before function called, it stops waiting without calling function.
+* {Function} func - original function.
+* {number} [delay = 100] - number of milliseconds must be waited before original function call.
+
+For examlpe:
+```javascript
+  import { waiter } from 'fcronjs';
+
+  const DELAY = 1000;
+  const f = waiter(console.log, DELAY);
+
+  f('Executing function must be called'); // will be executed after 1 second
+
+  setTimeout(() => {
+    f('Executing function must be ignored'); // Will never be executed
+
+    setTimeout(() => {
+      f(); // Canceling call after 500 ms.
+    }, DELAY / 2);
+  }, 5 * DELAY);
+
+```
 
 ## Support.
 Supported browsers _IE9+_.

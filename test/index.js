@@ -64,10 +64,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _throttle2 = _interopRequireDefault(_throttle);
 
+	var _waiter = __webpack_require__(7);
+
+	var _waiter2 = _interopRequireDefault(_waiter);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.debounce = _debounce2.default;
 	exports.throttle = _throttle2.default;
+	exports.waiter = _waiter2.default;
 
 /***/ }),
 /* 1 */
@@ -250,7 +255,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _utils = __webpack_require__(3);
 
 	/**
-	 * Method debounce creates Hi Ordered Function which sets minimal period between calls
+	 * Method throttle creates Hi Ordered Function which sets minimal period between calls
 	 * and execute last call every time at the end.
 	 * @param {Function} func - original function.
 	 * @param {Object|number} [secondArgument] - in case Object - configurin object,
@@ -300,6 +305,70 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (argList) {
 	          func.apply(context, argList);
 	        }
+	      }, delay);
+	    }
+	  };
+	};
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+
+	var _waiter = __webpack_require__(8);
+
+	var _waiter2 = _interopRequireDefault(_waiter);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _waiter2.default;
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	/**
+	 * Method waiter creates Hi Ordered Function which at call
+	 * waits some time befor call original function, and in
+	 * case of second call before function called, it stops
+	 * waiting without calling function.
+	 * @param {Function} func - original function.
+	 * @param {number} [delay = 100] - number of milliseconds
+	 *                                 must be waited before
+	 *                                 original function call.
+	 * @return {Function} - decorated function.
+	 */
+	exports.default = function (func) {
+	  var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 100;
+
+	  var timeout = void 0;
+
+	  return function () {
+	    var _this = this;
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    if (timeout) {
+	      clearTimeout(timeout);
+	      timeout = null;
+	    } else {
+	      timeout = setTimeout(function () {
+	        timeout = null;
+	        func.apply(_this, args);
 	      }, delay);
 	    }
 	  };
